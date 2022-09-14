@@ -21,28 +21,17 @@ const POLYGON_PRIVATE_KEY =
     process.env.POLYGON_PRIVATE_KEY ||
     "0x0000000000000000000000000000000000000000000000000000000000000000"
 module.exports = {
-    //solidity: "0.8.8",
-    solidity: {
-        compilers: [{ version: "0.8.7" }, { version: "0.6.6" }],
-    },
+    defaultNetwork: "hardhat",
     networks: {
+        hardhat: {
+            chainId: 31337,
+            blockConfirmations: 1,
+        },
         goerli: {
-            url: GOERLI_RPC_URL,
-            accounts: [PRIVATE_KEY],
             chainId: 5,
             blockConfirmations: 6,
-        },
-        rinkeby: {
-            url: RINKEBY_RPC_URL,
-            accounts: [RINKEBY_PRIVATE_KEY],
-            chainId: 4,
-            blockConfirmations: 6,
-        },
-        polygon: {
-            url: POLYGON_RPC_URL,
-            accounts: [POLYGON_PRIVATE_KEY],
-            chainId: 80001,
-            blockConfirmations: 6,
+            url: GOERLI_RPC_URL,
+            accounts: [PRIVATE_KEY],
         },
         localhost: {
             url: LOCAL_HOST_API,
@@ -50,10 +39,7 @@ module.exports = {
             chainId: 31337,
         },
     },
-    etherscan: {
-        apiKey: ETHERSCAN_API_KEY,
-    },
-
+    solidity: "0.8.7",
     namedAccounts: {
         deployer: {
             default: 0,
@@ -62,7 +48,6 @@ module.exports = {
             default: 1,
         },
     },
-
     gasReporter: {
         enabled: false,
         outputFile: "gas-report.txt",
@@ -72,6 +57,9 @@ module.exports = {
         token: "MATIC",
     },
     mocha: {
-        timeout: 200000, // 200 seconds max for running tests
+        timeout: 500000, //500seconds
+    },
+    etherscan: {
+        apiKey: ETHERSCAN_API_KEY,
     },
 }
