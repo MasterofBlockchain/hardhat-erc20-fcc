@@ -26,17 +26,21 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    function approve(address spender, uint256 amount) external returns (bool) {
+    function approve(address spender, uint256 amount)
+        external
+        override
+        returns (bool)
+    {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
     function transferFrom(
-        address from,
-        address to,
+        address sender,
+        address receipent,
         uint256 amount
-    ) external returns (bool) {
+    ) external override returns (bool) {
         allowance[sender][msg.sender] -= amount;
         balanceOf[sender] -= amount;
         balanceOf[receipent] += amount;
@@ -44,13 +48,13 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    function mint(uint256 amount) external {
+    function mint(uint256 amount) external override {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    function burn(uint256 amount) external {
+    function burn(uint256 amount) external override {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
         emit Transfer(msg.sender, address(0), amount);
