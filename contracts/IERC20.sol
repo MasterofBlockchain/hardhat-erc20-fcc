@@ -31,8 +31,14 @@ contract ERC20 is IERC20 {
     string public symbol = "Cash";
     uint8 public decimals = 18;
 
-    constructor(uint256 _totalSupply) {
-        _totalSupply = totalSupply;
+    constructor(
+        uint256 IntialSupply,
+        string memory tokenName,
+        string memory tokenSymbol
+    ) {
+        totalSupply = IntialSupply * 10**uint256(decimals);
+        name = tokenName;
+        symbol = tokenSymbol;
     }
 
     // This function will transfer tokens from `msg.sender` to `receipent`
