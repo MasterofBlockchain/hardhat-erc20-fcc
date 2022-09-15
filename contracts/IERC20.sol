@@ -17,13 +17,10 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  * The IERC20.sol is a interface contract, all in this file are standard as defined in the EIP.
  * As for ERC20.sol,
  * it is an implementation of the IERC20.sol, you can define all your token logic in it.
+ *
+ * @author why do we use allowanse function?
+ *
  */
-//questions-->
-//where is total supply?
-//why do we want to give permission to spender for allowance
-//function approves `allowance section`
-//funcion transferFrom `allowance section`
-//fucntion mint `address (0)`
 
 contract ERC20 is IERC20 {
     uint256 public override totalSupply;
@@ -52,6 +49,7 @@ contract ERC20 is IERC20 {
         return true;
     }
 
+    //this function will be used by `msg.sender` to approve funds to spender.
     function approve(address spender, uint256 amount)
         external
         override
@@ -62,25 +60,27 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    //this fucntion will be sued by spender
+    //this function will be used by spender
     function transferFrom(
         address sender,
         address receipent,
         uint256 amount
     ) external override returns (bool) {
-        allowance[sender][msg.sender] -= amount;
+        allowance[sender][msg.sender] -= amount; //[sender address][msg.sender]
         balanceOf[sender] -= amount;
         balanceOf[receipent] += amount;
         emit Transfer(sender, receipent, amount);
         return true;
     }
 
+    //function will be used for generate new tokens
     function mint(uint256 amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
+    //will be used for decrease the token numbers
     function burn(uint256 amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
