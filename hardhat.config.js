@@ -40,11 +40,12 @@ module.exports = {
         },
     },
     solidity: "0.8.7",
+    //getNamedAccount
     namedAccounts: {
         deployer: {
             default: 0,
         },
-        user: {
+        user1: {
             default: 1,
         },
     },
