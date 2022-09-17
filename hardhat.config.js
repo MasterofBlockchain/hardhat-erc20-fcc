@@ -8,6 +8,10 @@ const GOERLI_RPC_URL =
 const PRIVATE_KEY =
     process.env.PRIVATE_KEY ||
     "0x0000000000000000000000000000000000000000000000000000000000000000"
+const PRIVATE_KEY2 =
+    process.env.PRIVATE_KEY2 ||
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
 const LOCAL_HOST_API = process.env.LOCAL_HOST_API || "key"
 const COIN_MARKET_CAP_API = process.env.COIN_MARKET_CAP_API || "key"
@@ -31,7 +35,7 @@ module.exports = {
             chainId: 5,
             blockConfirmations: 6,
             url: GOERLI_RPC_URL,
-            accounts: [PRIVATE_KEY],
+            accounts: [PRIVATE_KEY, PRIVATE_KEY2],
         },
         localhost: {
             url: LOCAL_HOST_API,
